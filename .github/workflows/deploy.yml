@@ -9,10 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: subscription-service
-
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
@@ -39,10 +35,10 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "subscription-service/target/*.jar"
+          source: "target/*.jar"
           target: "/opt/subscription-service"
 
-      - name: Restart Service
+      - name: Deploy and Restart Service
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.EC2_HOST }}
