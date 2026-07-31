@@ -1,0 +1,26 @@
+<configuration>
+
+    <property name="LOG_PATH" value="logs"/>
+
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${LOG_PATH}/subscription.log</file>
+
+        <encoder>
+
+            <pattern>
+                %d %-5level [%X{CorrelationId}] %logger - %msg%n
+            </pattern>
+
+        </encoder>
+
+    </appender>
+
+    <root level="INFO">
+
+        <appender-ref ref="FILE"/>
+
+    </root>
+
+</configuration>
