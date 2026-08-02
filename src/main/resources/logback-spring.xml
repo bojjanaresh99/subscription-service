@@ -2,25 +2,31 @@
 
     <property name="LOG_PATH" value="logs"/>
 
+    <!-- Console logging -->
+    <appender name="CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder>
+            <pattern>%d %-5level [%X{CorrelationId}] %logger - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- File logging -->
     <appender name="FILE"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
+              class="ch.qos.logback.core.FileAppender">
 
         <file>${LOG_PATH}/subscription.log</file>
 
         <encoder>
-
-            <pattern>
-                %d %-5level [%X{CorrelationId}] %logger - %msg%n
-            </pattern>
-
+            <pattern>%d %-5level [%X{CorrelationId}] %logger - %msg%n</pattern>
         </encoder>
 
     </appender>
 
     <root level="INFO">
-
+        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
-
     </root>
 
 </configuration>
